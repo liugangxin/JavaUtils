@@ -124,7 +124,15 @@ public class ImageUtils {
 			// 获取新文件的地址
 			File outputfile = target;
 			// 生成新的合成过的用户二维码并写入新图片,formatName必须是png，不然合成图片会有红色蒙层
-			ImageIO.write(imageLocal, "png", outputfile);
+			//ImageIO.write(imageLocal, "png", outputfile);
+			
+			// 压缩图片
+			BufferedImage dimg = new BufferedImage(width/2, height/2, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g2 = dimg.createGraphics();
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			g2.drawImage(imageLocal, 0, 0, width/2, height/2, 0, 0, width, height, null);
+			g2.dispose();
+			ImageIO.write(dimg, "png", outputfile);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
