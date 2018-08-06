@@ -1,5 +1,15 @@
 java基础  
 Arrays.sort实现原理和Collection实现原理  
+后者是用前者实现的，如下
+    public static <T> void sort(List<T> list, Comparator<? super T> c) {
+        Object[] a = list.toArray();
+        Arrays.sort(a, (Comparator)c);
+        ListIterator i = list.listIterator();
+        for (int j=0; j<a.length; j++) {
+            i.next();
+            i.set(a[j]);
+        }
+    }
 foreach和while的区别(编译之后)  
 线程池的种类，区别和使用场景  
 分析线程池的实现原理和线程的调度过程  
