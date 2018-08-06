@@ -1,6 +1,6 @@
 java基础  
-Arrays.sort实现原理和Collection实现原理  
-后者是用前者实现的，如下
+Arrays.sort实现原理和Collection实现原理（后者是用前者实现的，如下 ）  
+
     public static <T> void sort(List<T> list, Comparator<? super T> c) {
         Object[] a = list.toArray();
         Arrays.sort(a, (Comparator)c);
@@ -11,13 +11,13 @@ Arrays.sort实现原理和Collection实现原理
         }
     }
 foreach和while的区别(编译之后)  
-线程池的种类，区别和使用场景  
-分析线程池的实现原理和线程的调度过程  
-线程池如何调优  
-线程池的最大线程数目根据什么确定  
-动态代理的几种方式  
-HashMap的并发问题  
-了解LinkedHashMap的应用吗  
+线程池的种类，区别和使用场景（[线程池](http://1181731633.iteye.com/admin/blogs/2342551)）  
+分析线程池的实现原理和线程的调度过程（同上）  
+线程池如何调优（1设置最大线程数，与cpu处理器一致。2最小数，防止大量线程空闲造成浪费。3设置任务最大值，防止太多任务，返回合适错误）  
+线程池的最大线程数目根据什么确定（一般核数乘2，也可核数*((计算时间x+等待时间y)/x)）  
+动态代理的几种方式（jdk动态代理、cglib动态代理。前者需要继承接口invocationHandler实现；后者底层使用ASM在内存中动态的生成被代理类的子类，简单易容且速度更快）  
+HashMap的并发问题（因为多线程操作hash指定的链表，可能造成同时操作，比如覆盖丢失上一个链表最后一个元素的next等。）  
+了解LinkedHashMap的应用吗（除了支持默认的插入顺序，还支持访问顺序。所谓访问顺序(access-order)是指在迭代遍历列表中的元素时最近访问的元素会排在LinkedHashMap的尾部，可以用来做LRU算法）  
 反射的原理，反射创建类实例的三种方式是什么？  
 cloneable接口实现原理，浅拷贝or深拷贝  
 Java NIO使用  
