@@ -26,9 +26,22 @@ hashtable和hashmap的区别有：线程安全不同（HashTable的方法同步�
 HashMap是默认16，而且增长一定是2的指数增长）、哈希值的使用不同（HashTable是直接使用对象的哈希值，HashMap是使用处理过的哈希值）
 hashmap的结构：数组+链表组成，根据hash值定位到数组某个位置上，再put时候，用if (e.hash == hash && ((k = e.key) == key || key.equals(k))) 来判断是否(Object) key相等。另外，在java8中，HashMap加入了红黑树结构，当链表元素较多(默认8个)时，链表就会转化为红黑树
 
-arraylist和linkedlist区别及实现原理  
-反射中，Class.forName和ClassLoader区别  
-String，Stringbuffer，StringBuilder的区别？  
+**arraylist和linkedlist区别及实现原理**  
+ArrayList实现原理就是动态数组，为什么叫动态数组呢，就是当ArrayList容量扩大时，底层的数组的容量会自动扩大50%,并且ArrayList是线程不安全的。
+其优点是查询消耗的时间短，属于随机查询。而相对于LinkedList而言它的添加、删除操作要更耗时。当元素超出数组内容，会产生一个新数组，将原来数组的数据复制到新数组中，再将新的元素添加到新数组中。
+对于ArrayList在存储大量数据时会大量浪费很多空间，原因就是数组的起始容量为10，当数组要增长时增长公式（newcapacity=(oldcapacity * 3)/2+1），相当于增加的50%，这样就会浪费大量空间，如果在你知道你要存储数据的容量前提下，最好声明容量大小。也可以使用trimToSize去掉多余的空间。  
+LinkedList的实现原理基于链表，用引用指向下一个元素。其优点就是方便添加和删除元素，而arraylist的优点恰恰的LinkedList的缺点，其查询方法消耗的时间要大于arraylist。
+
+**反射中，Class.forName和ClassLoader区别**  
+ClassLoader就是遵循双亲委派模型最终调用启动类加载器的类加载器，实现的功能是“通过一个类的全限定名来获取描述此类的二进制字节流”，获取到二进制流后放到JVM中。Class.forName()方法实际上也是调用的CLassLoader来实现的，只是实现也是调用了CLassLoader。但Class.forName加载类是默认将类进了初始化，而ClassLoader的loadClass并没有对类进行初始化，只是把类加载到了虚拟机中。  
+**String，Stringbuffer，StringBuilder的区别？**  
+运行速度快慢为：StringBuilder > StringBuffer > String，String最慢的原因：
+String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。
+而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。就是说，如果String有str+"1",str+"2"等操作，就会造成创建、回收对象，而Stringbuilder仅一个对象操作，就很快。
+String：适用于少量的字符串操作的情况
+StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
+StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况  
+
 有没有可能2个不相等的对象有相同的hashcode  
 简述NIO的最佳实践，比如netty，mina  
 TreeMap的实现原理  
