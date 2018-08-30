@@ -20,7 +20,7 @@ java基础
 **了解LinkedHashMap的应用吗**（除了支持默认的插入顺序，还支持访问顺序。所谓访问顺序(access-order)是指在迭代遍历列表中的元素时最近访问的元素会排在LinkedHashMap的尾部，可以用来做LRU算法）  
 **反射的原理，反射创建类实例的三种方式是什么？**([文章](https://blog.csdn.net/qq_35415600/article/details/70199995)[原理](https://www.cnblogs.com/techspace/p/6931397.html)反射是指在运行状态中,动态获取类的信息以及动态调用对象的方法的功能。是从缓存或JVM获得类的信息的，即缓存没有就去jvm拿，其实通过类加载机制就可看出，反射的基础是加载了类的信息到jvm中。三种方式分别为1、通过对象的getClass方法进行获取；2、任何数据类型(包括基本数据类型)都具备着一个静态的属性class，通过它可直接获取到该类型对应的Class对象。使用具体的类，调用类中的静态属性class即可；3、通过Class.forName()方法获取。)  
 **cloneable接口实现原理，浅拷贝or深拷贝**（实现该接口，如果接口简单实用super.clone()那仅仅实现了浅拷贝，即对象类型的属性字段是直接赋值引用的。若想深拷贝，必须针对对象类型的属性字段手动拷贝或特殊处理等。）  
-**Java NIO使用**（IO是阻塞面向流，NIO非阻塞式面向缓存区，核心在于通道channel和缓存区，缓存区有ByteBuffer、IntBuffer等。可用来做聊天通讯，以及游戏引擎等）  
+**Java NIO使用**（IO是阻塞面向流，NIO非阻塞式面向缓存区，核心在于通道channel和缓存区，缓存区有ByteBuffer、IntBuffer等，NIO的IO多路复用模型是建立在内核提供的多路分离函数select基础之上的，即select一个线程处理多个IO请求操作。可用来做聊天通讯，以及游戏引擎等）  
 **hashtable和hashmap的区别及实现原理，hashmap会问到数组索引，hash碰撞怎么解决**  
 hashtable和hashmap的区别有：线程安全不同（HashTable的方法同步，HashMap的方法未同步）、对null的处理不同（HashTable的key和value都不允许null值的存在，HashMap的key和value允许null值的存在，另外ConcurrentHashMap也一样不允许null值存在）、增长率不同（HashTable是默认为11，增长的方式是oid * 2+1
 HashMap是默认16，而且增长一定是2的指数增长）、哈希值的使用不同（HashTable是直接使用对象的哈希值，HashMap是使用处理过的哈希值）
